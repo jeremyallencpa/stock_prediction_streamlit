@@ -20,8 +20,7 @@ def menu():
 
     # First page
     if page == "Stock Indexes":
-        if st.button('View Index Data'):
-            dashboard()
+        dashboard()
 
     # Second Page
     elif page == "Stock Prediction":
