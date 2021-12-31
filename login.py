@@ -1,7 +1,6 @@
 import streamlit_authenticator as stauth
 from menu import *
 
-
 # Function for login. User is prompted to enter a username and password.
 # If user successfully logs in, the menu function will be displayed and the program functionality will
 # be displayed to the user.
