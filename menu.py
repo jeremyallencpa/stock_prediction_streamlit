@@ -10,8 +10,8 @@ def menu():
     page = st.sidebar.selectbox(
         "Select a Menu Option",
         [
-            "Homepage",
             "Stock Prediction",
+            "Stock Indexes",
             "Total Returns Analysis",
             "Volume Analysis",
             "Technical Analysis"
@@ -19,7 +19,7 @@ def menu():
     )
 
     # First page
-    if page == "Homepage":
+    if page == "Stock Indexes":
         if st.button('View Index Data'):
             dashboard()
 
