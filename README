@@ -1,0 +1,25 @@
+# Install these modules
+pip install streamlit
+pip install plotly
+pip install scikit-learn
+pip install scipy
+pip install matplotlib
+pip install tensorflow
+pip install yfinance
+pip install altair
+pip install streamlit-authenticator
+pip install yfinance --upgrade --no-cache-dir
+
+
+# To run go to terminal and enter:
+streamlit run main.py
+
+This program is used for stock analysis. The main functionalities within this program are:
+
+1) Stock prediction - using LSTM the program will predict stock prices given a stock ticker.
+2) Stock returns - using a date range and ticker symbol the program will show what $1,000 invested in a given stock
+would be at the end of the date range.
+3) Volume analysis - using a date range and ticker symbol the program will show the volume for each day in the
+date range.
+4) Technical analysis - using a date range and ticker symbol the program will show the 60 day moving average vs.
+the stock price over the given date range.
