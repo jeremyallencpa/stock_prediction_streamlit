@@ -57,34 +57,43 @@ def menu():
         if st.button('Run Portfolio builder'):
             # Converting string to list
             tickers = tickers_list.strip('][').split(', ')
-            today = dt.datetime.now()
-            one_year_ago = today - dt.timedelta(weeks=52)
-            start = one_year_ago
-            end = today
-            weights = portfolio_builder(tickers, start, end)
-            cum_returns = calc_portfolio_cumulative_returns(tickers, weights, start, end)
-            cum_returns_df = cum_returns[['Date', 'Cumulative Returns $1,000', 'Symbol']]
-            index_df = total_returns('^DJI', start, end)
-            comparison_data = pd.concat(
-                [cum_returns_df[['Date', 'Cumulative Returns $1,000', 'Symbol']],
-                 index_df[['Date', 'Cumulative Returns $1,000', 'Symbol']],
-                 ],
-                axis=0)
-            comparison_chart = alt.Chart(comparison_data).mark_line().encode(
-                x='Date',
-                y='Cumulative Returns $1,000',
-                color='Symbol'
-            ).properties(title=f"Cumulative returns of $1,000 invested in portfolio vs index", height=500,
-                         width=750).interactive()
-            st.altair_chart(comparison_chart)
+            invalid_tickers = []
+            for ticker in tickers:
+                if not check_valid_ticker(ticker):
+                    invalid_tickers.append(ticker)
+                else:
+                    pass
+            if (len(invalid_tickers)) != 0:
+                st.error("Check tickers! Invalid ticker entered.")
+            else:
+                today = dt.datetime.now()
+                one_year_ago = today - dt.timedelta(weeks=52)
+                start = one_year_ago
+                end = today
+                weights = portfolio_builder(tickers, start, end)
+                cum_returns = calc_portfolio_cumulative_returns(tickers, weights, start, end)
+                cum_returns_df = cum_returns[['Date', 'Cumulative Returns $1,000', 'Symbol']]
+                index_df = total_returns('^DJI', start, end)
+                comparison_data = pd.concat(
+                    [cum_returns_df[['Date', 'Cumulative Returns $1,000', 'Symbol']],
+                     index_df[['Date', 'Cumulative Returns $1,000', 'Symbol']],
+                     ],
+                    axis=0)
+                comparison_chart = alt.Chart(comparison_data).mark_line().encode(
+                    x='Date',
+                    y='Cumulative Returns $1,000',
+                    color='Symbol'
+                ).properties(title=f"Cumulative returns of $1,000 invested in portfolio vs index", height=500,
+                             width=750).interactive()
+                st.altair_chart(comparison_chart)
 
-            # Create a list of portfolio values
-            tickers_array = np.asarray(tickers)
-            tickers_df = pd.DataFrame(tickers_array, columns=["Ticker"])
-            weights_df = pd.DataFrame(weights, columns=["Weights"])
-            tickers_df['Weights'] = weights_df['Weights']
-            st.write("Here are the relative weights of the generated portfolio by ticker.")
-            st.write(tickers_df)
+                # Create a list of portfolio values
+                tickers_array = np.asarray(tickers)
+                tickers_df = pd.DataFrame(tickers_array, columns=["Ticker"])
+                weights_df = pd.DataFrame(weights, columns=["Weights"])
+                tickers_df['Weights'] = weights_df['Weights']
+                st.write("Here are the relative weights of the generated portfolio by ticker.")
+                st.write(tickers_df)
 
     # Total Returns Analysis Page
     elif page == "Total Returns Analysis":
