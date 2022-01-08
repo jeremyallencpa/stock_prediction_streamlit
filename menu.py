@@ -65,8 +65,7 @@ def menu():
                 else:
                     pass
             if (len(invalid_tickers)) != 0:
-                st.error("Check tickers! Invalid ticker entered.")
-                st.write(f"The following tickers are invalid: {invalid_tickers}")
+                st.error(f"Invalid tickers entered. The following tickers are invalid: {invalid_tickers}")
             # Run program if tickers are all valid.
             else:
                 today = dt.datetime.now()
