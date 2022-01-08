@@ -13,3 +13,4 @@ statsmodels~=0.13.1
 yahoo-fin~=0.8.9.1
 matplotlib~=3.5.1
 scipy~=1.7.3
+pandas_datareader
