@@ -57,6 +57,7 @@ def menu():
         if st.button('Run Portfolio builder'):
             # Converting string to list
             tickers = tickers_list.strip('][').split(', ')
+            # Check tickers
             invalid_tickers = []
             for ticker in tickers:
                 if not check_valid_ticker(ticker):
@@ -65,6 +66,8 @@ def menu():
                     pass
             if (len(invalid_tickers)) != 0:
                 st.error("Check tickers! Invalid ticker entered.")
+                st.write(f"The following tickers are invalid: {invalid_tickers}")
+            # Run program if tickers are all valid.
             else:
                 today = dt.datetime.now()
                 one_year_ago = today - dt.timedelta(weeks=52)
