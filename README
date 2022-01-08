@@ -9,7 +9,8 @@ pip install yfinance
 pip install altair
 pip install streamlit-authenticator
 pip install yfinance --upgrade --no-cache-dir
-
+pip install statsmodels
+pip install yahoo-fin (yahoo-fin-0.8.9.1)
 
 # To run go to terminal and enter:
 streamlit run main.py

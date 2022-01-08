@@ -3,6 +3,8 @@ from total_returns import *
 from volume_analysis import *
 from technical_analysis import *
 from dashboard import *
+from stock_clustering import *
+from portfolio_models import *
 
 
 # Menu function to display menu options.
@@ -10,6 +12,8 @@ def menu():
     page = st.sidebar.selectbox(
         "Select a Menu Option",
         [
+            "Stock Clustering",
+            "Portfolio Builder",
             "Stock Prediction",
             "Stock Indexes",
             "Total Returns Analysis",
@@ -18,30 +22,71 @@ def menu():
         ]
     )
 
-    # First page
+    # Stock index page
     if page == "Stock Indexes":
         dashboard()
 
-    # Second Page
+    # Stock Prediction Page
     elif page == "Stock Prediction":
         ticker = st.text_input("Enter valid stock ticker:")
         today = dt.datetime.now()
-        five_years_ago = today - dt.timedelta(weeks=260)
-        start = five_years_ago
+        one_year_ago = today - dt.timedelta(weeks=260)
+        start = one_year_ago
         end = today
         if st.button('Run Stock Prediction Program'):
             check_ticker = check_valid_ticker(ticker)
-            check_valid_dates = check_date_range(start, end)
-            if check_ticker & check_valid_dates:
+            if check_ticker:
                 stock_predictor(ticker, start, end)
             elif not check_ticker:
                 st.error("Invalid ticker. Try again.")
-            elif not check_valid_dates:
-                st.error("Invalid date range. "
-                         "Ensure start date is before end date and "
-                         "that both dates are not on weekends.")
 
-    # Third Page
+    # Stock Clustering Page
+    elif page == "Stock Clustering":
+        st.header("Stock Clustering Using K-Means for the Dow Jone Industrial Index")
+        st.write("Note: this process may take several minutes to run.")
+        if st.button('Run Stock Clustering Program'):
+            stock_clustering_tester()
+
+    # Portfolio builder page
+    elif page == "Portfolio Builder":
+        st.header("Portfolio Builder Using Monte Carlo Simulations")
+        st.write("Note: this process may take several minutes to run.")
+        st.write("Enter list of tickers separated by commas and a space below. For example: AMZN, NFLX, AAPL, GOOG")
+        # Get list of tickers
+        tickers_list = st.text_input("Enter list of tickers separated by commas and a space here:")
+        if st.button('Run Portfolio builder'):
+            # Converting string to list
+            tickers = tickers_list.strip('][').split(', ')
+            today = dt.datetime.now()
+            one_year_ago = today - dt.timedelta(weeks=52)
+            start = one_year_ago
+            end = today
+            weights = portfolio_builder(tickers, start, end)
+            cum_returns = calc_portfolio_cumulative_returns(tickers, weights, start, end)
+            cum_returns_df = cum_returns[['Date', 'Cumulative Returns $1,000', 'Symbol']]
+            index_df = total_returns('^DJI', start, end)
+            comparison_data = pd.concat(
+                [cum_returns_df[['Date', 'Cumulative Returns $1,000', 'Symbol']],
+                 index_df[['Date', 'Cumulative Returns $1,000', 'Symbol']],
+                 ],
+                axis=0)
+            comparison_chart = alt.Chart(comparison_data).mark_line().encode(
+                x='Date',
+                y='Cumulative Returns $1,000',
+                color='Symbol'
+            ).properties(title=f"Cumulative returns of $1,000 invested in portfolio vs index", height=500,
+                         width=750).interactive()
+            st.altair_chart(comparison_chart)
+
+            # Create a list of portfolio values
+            tickers_array = np.asarray(tickers)
+            tickers_df = pd.DataFrame(tickers_array, columns=["Ticker"])
+            weights_df = pd.DataFrame(weights, columns=["Weights"])
+            tickers_df['Weights'] = weights_df['Weights']
+            st.write("Here are the relative weights of the generated portfolio by ticker.")
+            st.write(tickers_df)
+
+    # Total Returns Analysis Page
     elif page == "Total Returns Analysis":
         ticker1 = st.text_input("Enter valid stock ticker")
         ticker2 = st.selectbox(
@@ -63,7 +108,7 @@ def menu():
                          "Ensure start date is before end date and "
                          "that both dates are not on weekends.")
 
-    # Fourth Page
+    # Volume Analysis Page
     elif page == "Volume Analysis":
         ticker = st.text_input("Enter valid stock ticker")
         max_value = dt.datetime.now()
@@ -82,7 +127,7 @@ def menu():
                          "Ensure start date is before end date and "
                          "that both dates are not on weekends.")
 
-    # Fifth page
+    # Technical Analysis page
     elif page == "Technical Analysis":
         ticker = st.text_input("Enter valid stock ticker")
         today = dt.datetime.now()
