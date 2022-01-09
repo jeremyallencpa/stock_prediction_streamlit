@@ -16,7 +16,7 @@ def convert_df(df):
     return df.to_csv().encode('utf-8')
 
 
-def stock_clustering_tester():
+def stock_clustering_kmeans():
     # Stock clusters for this program are the stock tickers in the Dow Jones Industrial Index.
     # Code allows for additional indexes to be added at a later time.
     stocks = si.tickers_dow()

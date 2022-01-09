@@ -45,7 +45,7 @@ def menu():
         st.header("Stock Clustering Using K-Means for the Dow Jone Industrial Index")
         st.write("Note: this process may take several minutes to run.")
         if st.button('Run Stock Clustering Program'):
-            stock_clustering_tester()
+            stock_clustering_kmeans()
 
     # Portfolio builder page
     elif page == "Portfolio Builder":
