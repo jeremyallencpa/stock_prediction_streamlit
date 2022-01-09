@@ -2,7 +2,7 @@ from stock_predictor import *
 from total_returns import *
 from volume_analysis import *
 from technical_analysis import *
-from dashboard import *
+from stock_indexes import *
 from stock_clustering import *
 from portfolio_models import *
 
