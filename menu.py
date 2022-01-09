@@ -24,10 +24,14 @@ def menu():
 
     # Stock index page
     if page == "Stock Indexes":
+        st.header("Stock Indexes - 5 Year Charts")
+        st.write("Note: this process may take several minutes to run.")
         dashboard()
 
     # Stock Prediction Page
     elif page == "Stock Prediction":
+        st.header("Stock Prediction using LSTM Neural Network")
+        st.write("Note: this process may take several minutes to run.")
         ticker = st.text_input("Enter valid stock ticker:")
         today = dt.datetime.now()
         one_year_ago = today - dt.timedelta(weeks=260)
@@ -99,6 +103,8 @@ def menu():
 
     # Total Returns Analysis Page
     elif page == "Total Returns Analysis":
+        st.header("Total Returns Analysis")
+        st.write("Note: this process may take several minutes to run.")
         ticker1 = st.text_input("Enter valid stock ticker")
         ticker2 = st.selectbox(
             'Select comparison index',
@@ -121,6 +127,8 @@ def menu():
 
     # Volume Analysis Page
     elif page == "Volume Analysis":
+        st.header("Volume Analysis")
+        st.write("Note: this process may take several minutes to run.")
         ticker = st.text_input("Enter valid stock ticker")
         max_value = dt.datetime.now()
         min_value = max_value - dt.timedelta(days=30)
@@ -140,6 +148,8 @@ def menu():
 
     # Technical Analysis page
     elif page == "Technical Analysis":
+        st.header("Technical Analysis")
+        st.write("Note: this process may take several minutes to run.")
         ticker = st.text_input("Enter valid stock ticker")
         today = dt.datetime.now()
         six_months_ago = today - dt.timedelta(days=180)

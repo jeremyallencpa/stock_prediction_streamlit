@@ -20,7 +20,6 @@ def display_index(ticker, ticker_color, index_name):
 # Function to display the dashboard.
 def dashboard():
     # Generate header. Provide a select box with 4 indexes: S&P500, DJI, Nasdaq and BTC
-    st.title("The Prophet")
     ticker = st.selectbox(
         'Select index',
         ('^GSPC', '^DJI', '^IXIC', 'BTC-USD'))
