@@ -12,8 +12,10 @@ pip install yfinance --upgrade --no-cache-dir
 pip install statsmodels
 pip install yahoo-fin (yahoo-fin-0.8.9.1)
 
-# To run go to terminal and enter:
-streamlit run main.py
+# To run go to browser and enter:
+https://share.streamlit.io/jeremyallencpa/stock_prediction_streamlit/main.py
+username: tester
+password: testing!
 
 This program is used for stock analysis. The main functionalities within this program (represented as tabs in the
  application sidebar menu) are:
