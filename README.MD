@@ -1,0 +1,31 @@
+# To install all modules
+pip install -r requirements.txt
+
+# To run go to browser and enter:
+https://share.streamlit.io/jeremyallencpa/stock_prediction_streamlit/main.py
+
+# About
+This program is used for stock analysis. The main functionalities within this program (represented as tabs in the
+ application sidebar menu) are:
+
+1) Stock Clustering - using K-Means clustering, the Dow Jones Industrial Average is clustered into 10 groups based on
+returns and volatility. This data can be downloaded and used in the 'Portfolio Builder' tab of the application.
+
+2) Portfolio Builder - using Monte Carlo simulations, this takes a list of stock tickers and provides a weighting
+for those stocks that maximizes the Sharpe Ratio of the portfolio. The returns of this portfolio are compared to
+the Dow Jones Industrial Average for the user.
+
+3) Stock Prediction - using LSTM the program will predict stock prices given a stock ticker and make a buy or sell
+recommendation.
+
+4) Stock Indexes - allows the user to view the following stock indexes over the last 5 years (GSPC, DJI, IXIC, BTC-USD)
+which represent the S&P500, Dow Jones Industrial Average, Nasdaq, and Bitcoin.
+
+5) Stock Returns - using a date range and ticker symbol the program will show what $1,000 invested in a given stock
+would be at the end of the date range.
+
+6) Volume Analysis - using a date range and ticker symbol the program will show the volume for each day in the
+date range.
+
+7) Technical Analysis - using a date range and ticker symbol the program will show the 60 day moving average vs.
+the stock price over the given date range.
