@@ -1,9 +1,9 @@
-from login import *
+from menu import *
 
 
 # Main function - calls login function to begin.
 def main():
-    login()
+    menu()
 
 
 if __name__ == "__main__":
