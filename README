@@ -1,4 +1,4 @@
-# Install these modules
+# To install all modules
 pip install -r requirements.txt
 
 # To run go to browser and enter:
