@@ -1,21 +1,8 @@
 # Install these modules
-pip install streamlit
-pip install plotly
-pip install scikit-learn
-pip install scipy
-pip install matplotlib
-pip install tensorflow
-pip install yfinance
-pip install altair
-pip install streamlit-authenticator
-pip install yfinance --upgrade --no-cache-dir
-pip install statsmodels
-pip install yahoo-fin (yahoo-fin-0.8.9.1)
+pip install -r requirements.txt
 
 # To run go to browser and enter:
 https://share.streamlit.io/jeremyallencpa/stock_prediction_streamlit/main.py
-username: tester
-password: testing!
 
 This program is used for stock analysis. The main functionalities within this program (represented as tabs in the
  application sidebar menu) are:
